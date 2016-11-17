@@ -1,0 +1,23 @@
+{% load static %}
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'shoppingapp/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'shoppingapp/css/style.css' %}" />
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Canteen DB</a>
+      </div>
+      <div class="nav navbar-nav">
+        <li {% if request.path == '/categories' %}class="active"{% endif %}><a href="/categories">Categories</a></li>
+        <li {% if request.path == '/products' %}class="active"{% endif %}><a href="/products">Products</a></li>
+        <li {% if request.path == '/search' %}class="active"{% endif %}><a href="/search">Search</a></li>
+      </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <div class="well well-sm">Canteen DB by Angus Atkinson for an IST assignment.</div>
+  </body>
+</html>
