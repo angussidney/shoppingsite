@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="{% static 'shoppingapp/css/style.css' %}" />
   </head>
   <body>
-    <ul>
-      <li></li>
-    </ul>
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand {% if request.path == '/' %}active{% endif %}" href="#">Django app</a>
+    </nav>
+    {% block content %}
+    {% endblock %}
   </body>
 </html>
