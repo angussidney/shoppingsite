@@ -1,0 +1,12 @@
+.thumbnail img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.thumbnail .caption {
+    text-align: center;
+}
+
+a.thumbnail:hover {
+    text-decoration: none;
+}
