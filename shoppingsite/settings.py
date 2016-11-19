@@ -123,3 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+import os
+settings_dir = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+IMAGES_FOLDER = os.path.join(PROJECT_ROOT, 'shoppingapp/static/shoppingapp/images/')
