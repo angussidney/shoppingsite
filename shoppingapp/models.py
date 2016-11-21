@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from shoppingsite.settings import IMAGES_FOLDER
 
@@ -17,5 +18,6 @@ class Product(models.Model):
     rating = models.IntegerField(default=0)
     stock = models.IntegerField(default=10)
     thumbnail = models.FilePathField(path=IMAGES_FOLDER, recursive=True)
+    date_added = models.DateTimeField('date added', default=timezone.now())
     def __str__(self):
         return self.product_name

@@ -5,6 +5,13 @@ from .models import *
 
 # Create your views here.
 def index(request):
-    products_list = Product.objects.order_by('price')
+    newest_products_list = Product.objects.order_by('-date_added')[:4]
+    specials_list = none;
+    context = {'newest_products_list': newest_products_list,
+               'specials_list': specials_list}
+    return render(request, 'shoppingapp/home.html', context)
+
+def categories(request):
+    products_list = Product.objects.order_by('-price')[:4]
     context = {'products_list': products_list}
     return render(request, 'shoppingapp/home.html', context)
