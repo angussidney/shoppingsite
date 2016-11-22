@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+import django.utils
 
 from shoppingsite.settings import IMAGES_FOLDER
 
@@ -14,10 +14,11 @@ class Category(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(Category)
     product_name = models.CharField(max_length=200)
-    price = models.IntegerField(default=0)
-    rating = models.IntegerField(default=0)
-    stock = models.IntegerField(default=10)
     thumbnail = models.FilePathField(path=IMAGES_FOLDER, recursive=True)
-    date_added = models.DateTimeField('date added', default=timezone.now())
+    price = models.FloatField(default=0.0)
+    rating = models.FloatField(default=2.5)
+    stock = models.IntegerField(default=10)
+    date_added = models.DateTimeField('date added', default=django.utils.timezone.now)
+    special = models.DecimalField(default=0.0, decimal_places=2, max_digits=3)
     def __str__(self):
         return self.product_name
