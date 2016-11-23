@@ -12,6 +12,11 @@ def index(request):
     return render(request, 'shoppingapp/home.html', context)
 
 def categories(request):
-    products_list = Product.objects.order_by('-price')[:4]
+    categories_list = Category.objects.order_by('category_name')
+    context = {'categories_list': categories_list}
+    return render(request, 'shoppingapp/categories.html', context)
+
+def products(request):
+    products_list = Product.objects.order_by('product_name')
     context = {'products_list': products_list}
-    return render(request, 'shoppingapp/home.html', context)
+    return render(request, 'shoppingapp/products.html', context)

@@ -1,0 +1,27 @@
+{% extends 'shoppingapp/base.html' %}
+
+{% block content %}
+
+<table class="table sortable-table" style="margin-top: 20px">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Rating</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for product in products_list %}
+      <tr>
+        <td>{{ product.product_name }}</td>
+        <td>${{ product.price }}</td>
+        <td>{{ product.rating }}</td>
+        <td>{{ product.category }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
