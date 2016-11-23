@@ -15,7 +15,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category)
     product_name = models.CharField(max_length=200)
     thumbnail = models.FilePathField(path=IMAGES_FOLDER, recursive=True)
-    price = models.FloatField(default=0.0)
+    price = models.DecimalField(default=0.0, decimal_places=2, max_digits=3)
     rating = models.FloatField(default=2.5)
     stock = models.IntegerField(default=10)
     date_added = models.DateTimeField('date added', default=django.utils.timezone.now)
