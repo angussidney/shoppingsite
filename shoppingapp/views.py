@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 from .models import *
@@ -20,3 +20,13 @@ def products(request):
     products_list = Product.objects.order_by('product_name')
     context = {'products_list': products_list}
     return render(request, 'shoppingapp/products.html', context)
+
+def category_detail(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    context = {'category': category}
+    return render(request, 'shoppingapp/category_detail.html', context)
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    context = {'product': product}
+    return render(request, 'shoppingapp/product_detail.html', context)

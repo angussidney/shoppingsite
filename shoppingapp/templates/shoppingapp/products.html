@@ -15,7 +15,7 @@
   <tbody>
     {% for product in products_list %}
       <tr>
-        <td>{{ product.product_name }}</td>
+        <td><a href="/products/{{ product.pk }}/{{ product.product_name|lower|cut:" " }}" class="product_rows">{{ product.product_name }}</a></td>
         <td>${{ product.price }}</td>
         <td>{{ product.rating }}</td>
         <td>{{ product.category }}</td>

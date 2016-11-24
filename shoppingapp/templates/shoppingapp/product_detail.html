@@ -1,0 +1,22 @@
+{% extends 'shoppingapp/base.html' %}
+{% load mathtag %}
+
+{% block content %}
+
+<h2>{{ product.product_name }}</h2>
+<h4>({{ product.category }})</h4>
+
+<img src="static/shoppingapp/images/{{ product.thumbnail }}" alt="Image {{ product.product_name }}">
+
+{% if product.special > 0 %}
+    {% math product.special product.price "(1 - $1) * $2" as special_price %}
+    {% math product.special "$1 * 100" as special_percentage %}
+    <p><s>${{ product.price }}</s> <span style="color: red">${{ special_price|floatformat:"2" }}</span> ({{ special_percentage|floatformat:"0" }}% off!)</p>
+{% else %}
+    <p>${{ product.price }}</p>
+{% endif %}
+<p>Rating: {{ product.rating }} stars</p>
+
+<p>Added on {{ product.date_added }}</p>
+
+{% endblock %}
