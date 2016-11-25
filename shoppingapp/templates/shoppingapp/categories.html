@@ -6,7 +6,7 @@
 <div class="row">
 {% for category in categories_list %}
   <div class="col-sm-6 col-md-3">
-    <a href="#" class="thumbnail">
+    <a href="/categories/{{ category.pk }}" class="thumbnail">
       <div class="caption">
         <h3>{{ category.category_name }}</h3>
         <p>{{ category.description }}</p>
