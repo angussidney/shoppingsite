@@ -3,20 +3,40 @@
 
 {% block content %}
 
-<h2>{{ product.product_name }}</h2>
-<h4>({{ product.category }})</h4>
-
-<img src="static/shoppingapp/images/{{ product.thumbnail }}" alt="Image {{ product.product_name }}">
-
-{% if product.special > 0 %}
-    {% math product.special product.price "(1 - $1) * $2" as special_price %}
-    {% math product.special "$1 * 100" as special_percentage %}
-    <p><s>${{ product.price }}</s> <span style="color: red">${{ special_price|floatformat:"2" }}</span> ({{ special_percentage|floatformat:"0" }}% off!)</p>
-{% else %}
-    <p>${{ product.price }}</p>
-{% endif %}
-<p>Rating: {{ product.rating }} stars</p>
-
-<p>Added on {{ product.date_added }}</p>
+<div class="row">
+  <div class="col-md-4">
+    <h2>{{ product.product_name }}</h2>
+    <h4>({{ product.category }})</h4>
+    <img src="static/shoppingapp/images/{{ product.thumbnail }}" alt="Image {{ product.product_name }}">
+    {% if product.special > 0 %}
+        {% math product.special product.price "(1 - $1) * $2" as special_price %}
+        {% math product.special "$1 * 100" as special_percentage %}
+        <p><s>${{ product.price }}</s> <span style="color: red">${{ special_price|floatformat:"2" }}</span> ({{ special_percentage|floatformat:"0" }}% off!)</p>
+    {% else %}
+        <p>${{ product.price }}</p>
+    {% endif %}
+  </div>
+  <div class="col-md-4">
+    <h3>Details</h3>
+    <p>Rated {{ product.rating }}/5 stars</p>
+    <p>Added on {{ product.date_added }}</p>
+    <h3>Ingredients</h3>
+    <p>{{ product.ingredients }}</p>
+  </div>
+  <div class="col-md-4">
+    <h3>Buy it now</h3>
+    <form action="/buy/{{product.pk}}/" method="post">
+      {% csrf_token %}
+      QTY:
+      <select name="quantity" class="selectpicker">
+        {% for i in range %}
+          <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+        {% endfor %}
+      </select>
+      <input class="btn btn-primary" type="submit" value="Buy" />
+    </form>
+    {% if status %}<p><strong>{{ status }}</strong></p>{% endif %}
+  </div>
+</div>
 
 {% endblock %}

@@ -21,5 +21,6 @@ class Product(models.Model):
     stock = models.IntegerField(default=10)
     date_added = models.DateTimeField('date added', default=django.utils.timezone.now)
     special = models.DecimalField(default=0.0, decimal_places=2, max_digits=3)
+    ingredients = models.TextField(default="Insert ingredients here")
     def __str__(self):
         return self.product_name

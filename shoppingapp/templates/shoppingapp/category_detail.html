@@ -10,7 +10,7 @@
 {% for product in category.product_set.all %}
   <div class="col-sm-6 col-md-3">
     <a href="#" class="thumbnail">
-      <img src="C:\IT\shoppingsite\shoppingapp\static\shoppingapp\images\mini%20garlic%20roll.jpg" alt="{{ product.product_name }}">
+      <img src="static/shoppingapp/images/{{ product.thumbnail }}" alt="{{ product.product_name }}">
       <div class="caption">
         <h3>{{ product.product_name }}</h3>
       </div>

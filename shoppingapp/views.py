@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import *
 
@@ -28,8 +28,30 @@ def products(request):
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    context = {'product': product}
+    context = {'product': product,
+               'range': range(product.stock)}
     return render(request, 'shoppingapp/product_detail.html', context)
 
 def search(request):
-    return render(request, 'shoppingapp/search.html')
+    categories_list = Category.objects.order_by('category_name')
+    context = {'categories_list': categories_list}
+    return render(request, 'shoppingapp/search.html', context)
+
+def buy(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    quantity = request.POST.get("quantity", 0)
+    if quantity > product.stock:
+        return render(request, 'shoppingapp/product_detail.html', {
+            'product': product,
+            'status': "Error: Not enough items in stock",
+        })
+    else:
+        product.stock -= quantity
+        product.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return render(request, 'shoppingapp/product_detail.html', {
+            'product': product,
+            'status': "Success! Your order has been placed.",
+        })
